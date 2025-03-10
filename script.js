@@ -10,7 +10,6 @@ async function fetchCountryData() {
     const countryInfoSection = document.getElementById("country-info");
     const bordersSection = document.getElementById("bordering-countries");
 
-    // Clear previous results
     countryInfoSection.innerHTML = "";
     bordersSection.innerHTML = "";
 
@@ -21,14 +20,12 @@ async function fetchCountryData() {
         const data = await response.json();
         const country = data[0];
 
-        // Extract country details
         const capital = country.capital ? country.capital[0] : "N/A";
         const population = country.population.toLocaleString();
         const region = country.region;
         const flagUrl = country.flags.svg;
         const borders = country.borders || [];
 
-        // Display country info
         countryInfoSection.innerHTML = `
             <h2>${country.name.common}</h2>
             <p><strong>Capital:</strong> ${capital}</p>
@@ -37,7 +34,6 @@ async function fetchCountryData() {
             <img src="${flagUrl}" alt="Flag of ${country.name.common}">
         `;
 
-        // Fetch bordering countries if available
         if (borders.length > 0) {
             bordersSection.innerHTML = "<h3>Bordering Countries:</h3>";
             borders.forEach(async (borderCode) => {
